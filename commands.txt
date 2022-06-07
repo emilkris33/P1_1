@@ -1,0 +1,12 @@
+ssh s164234@login1.hpc.dtu.dk
+
+02514sh
+bkill XXXXXXXX
+
+scp FILE s164234@login1.hpc.dtu.dk:PATH
+
+source venv_p1/bin/activate
+
+jupyter notebook --no-browser --port=7656 --ip=$HOSTNAME
+
+ssh s164234@login1.hpc.dtu.dk -g -L7656:n-62-11-12:7656 –N
