@@ -18,11 +18,11 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 dataset = hotdog.dataset()
 
 model = Network() 
-model.state_dict(torch.load( open( "model.p", "rb" ) ))
+model.load_state_dict(torch.load("model.p"))
 
 #Initialize the optimizer
 optimizerAdam = torch.optim.Adam(model.parameters())
 
 out_dictAdam = train(dataset, model, optimizerAdam, 10)
 
-pickle.dump(model, open( "model2.p", "wb" ) )
+torch.save( model.state_dict(), "model2.p")
