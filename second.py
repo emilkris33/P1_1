@@ -59,8 +59,9 @@ class Network(nn.Module):
                 nn.Linear(32768, 500),
                 nn.Dropout(p=drop_rate),
                 nn.ReLU(),
-                nn.Linear(500, 2),
-                nn.LogSoftmax(dim=1))
+                nn.Linear(500, 2)
+                #nn.LogSoftmax(dim=1)
+                )
     
     def forward(self, x):
         x = self.convolutional(x)
@@ -74,6 +75,6 @@ modelAdam.to(device)
 #Initialize the optimizer
 optimizerAdam = torch.optim.Adam(modelAdam.parameters())
 
-out_dictAdam = train(dataset, modelAdam, optimizerAdam, 5)
+out_dictAdam = train(dataset, modelAdam, optimizerAdam, 20)
 
-torch.save( modelAdam.state_dict(), open( "model.p", "wb" ) )
+torch.save( modelAdam.state_dict(), "model.p")

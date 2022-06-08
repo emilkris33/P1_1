@@ -2,15 +2,16 @@ import numpy as np
 from tqdm import tqdm
 import torch
 import torch.nn.functional as F
+import torch.nn as nn
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-
 
 #We define the training as a function so we can easily re-use it.
 def train(dataset, model, optimizer, num_epochs=10):
     def loss_fun(output, target):
-        return F.nll_loss(output, target)
+        loss = nn.CrossEntropyLoss()
+        return loss(output, target)
+        #return F.nll_loss(output, target)
     out_dict = {'train_acc': [],
               'test_acc': [],
               'train_loss': [],
